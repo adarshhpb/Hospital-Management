@@ -37,24 +37,22 @@ const Appointments = () => {
         });
     };
 
-    const handleSubmitClick = async () => {
+    const handleSubmitClick = async (e) => {
+        e.preventDefault();
         try {
             // Send the form data to the backend
             console.log(formData);
             const response = await axios.post('http://localhost:5000/scheduleAppointment', formData);
 
-            if (response.status === 200) {
-                // If scheduling is successful, navigate to the appointments list page
+            if (response && response.data) {
+                console.log(response.data);
+                // Handle the response data as needed
                 alert('Appointment scheduled successfully');
-                navigate('/ap');
             } else {
-                // Handle scheduling failure (e.g., show an error message)
-                console.error('Scheduling failed');
+                console.error('Unexpected response format:', response);
             }
         } catch (error) {
-            // Handle error (e.g., show an error message)
-            console.error('An error occurred during scheduling:', error);
-            alert(error.response.data.message);
+            console.error('Error scheduling appointment:', error);
         }
     };
 

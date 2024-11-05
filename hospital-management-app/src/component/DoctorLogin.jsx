@@ -18,7 +18,7 @@ const DoctorLogin = () => {
       });
 
       if (response.status === 200) {
-        navigate('/view');
+        navigate('/docview');
       } else {
         console.error('Login failed');
       }

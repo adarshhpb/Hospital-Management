@@ -7,7 +7,7 @@ db = MySqlDB()
 
 app = Flask(__name__) 
 
-CORS(app,supports_credentials=True)  # corss policy violation
+CORS(app)  # corss policy violation
 
 @app.route('/loginUser',methods=['POST'])
 def login_user():
@@ -87,13 +87,38 @@ def schedule_appointment():
     date = request.json["date"]
     time = request.json["time"]
 
-    # You can add any validation or checks here if needed
-
+    # try:
+        # Find the patient ID
+    patient_query = "SELECT id FROM users WHERE username=%s"
+    patient = db.fetchone(patient_query, patient_name)
+    if not patient:
+        return jsonify({"message": "Patient not found"}), 404
+    patient_id = patient[0]
+    print(f"Patient ID: {patient[0]}")   
+    # Find the doctor ID
+    doctor_query = "SELECT id FROM doctors WHERE username=%s"
+    doctor = db.fetchone(doctor_query, doctor_name)
+    if not doctor:
+        return jsonify({"message": "Doctor not found"}), 404
+    doctor_id = doctor[0]
+    print(f"Doctor ID: {doctor_id}")
     # Insert the appointment into the database
-    db.execute("INSERT INTO appointments(patient_name, doctor_name, date, time) VALUES(%s, %s, %s, %s)", 
-               patient_name, doctor_name, date, time)
-    
+    insert_query = "INSERT INTO appointments(patient_id, doctor_id, patient_name, doctor_name, date, time) VALUES(%s, %s, %s, %s, %s, %s)"
+    db.execute(insert_query,patient_id, doctor_id, patient_name, doctor_name ,date, time)
+
     return jsonify({"message": "Appointment scheduled successfully."}), 200
+    #   cept Exception as e:
+    #     print(f"Error: {e}")
+    #     return jsonify({"message": "Error scheduling appointment", "error": str(e)}), 500
+
+
+@app.route('/getScheduledAppointments', methods=['GET'])
+def get_scheduled_appointments():
+    try:
+        appointments = db.fetchall("SELECT * FROM appointments")
+        return jsonify(appointments), 200
+    except Exception as e:
+        return jsonify({"message": "Error fetching appointments", "error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
