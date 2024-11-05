@@ -21,6 +21,8 @@ const DoctorSchedule = () => {
         fetchAppointments();
     }, []);
 
+
+
     const handleFinish = async (appointmentId) => {
         try {
             // Send request to handle the appointment
@@ -38,6 +40,16 @@ const DoctorSchedule = () => {
         }
     };
 
+    const finishAppointment = (appointmentId) => {
+        axios.post('http://localhost:5000/finishAppointment', { appointmentId })
+            .then(response => {
+                alert(response.data.message);
+                // Optionally, refresh the appointments list
+                setAppointments(appointments.filter(appointment => appointment.id !== appointmentId));
+            })
+            .catch(error => console.error('Error finishing appointment:', error));
+    };
+
     return (
         <div>
             <DocHeader isDoctor={true} />
@@ -48,15 +60,12 @@ const DoctorSchedule = () => {
                         <div key={appointment.id} className="col-12 mb-3">
                             <div className="card">
                                 <div className="card-body">
-                                    <h5 className="card-title">Patient: {appointment.patientName}</h5>
-                                    <p className="card-text">Doctor: {appointment.doctorName}</p>
+                                    <h5 className="card-title">Patient: {appointment.patient_name}</h5>
+                                    <p className="card-text">Doctor: {appointment.doctor_name}</p>
                                     <p className="card-text">Date: {appointment.date}</p>
                                     <p className="card-text">Time: {appointment.time}</p>
-                                    <button
-                                        className="btn btn-success"
-                                        onClick={() => handleFinish(appointment.id)}
-                                    >
-                                        Mark as Finished
+                                    <button onClick={() => finishAppointment(appointment.id)} className="btn btn-primary">
+                                        Finish Appointment
                                     </button>
                                 </div>
                             </div>
@@ -69,3 +78,5 @@ const DoctorSchedule = () => {
 };
 
 export default DoctorSchedule;
+
+

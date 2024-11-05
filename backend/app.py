@@ -1,6 +1,6 @@
 from flask import Flask, jsonify,  request
 from flask_cors import CORS
-
+from datetime import date as d , timedelta
 from database import MySqlDB
 
 db = MySqlDB()
@@ -112,11 +112,57 @@ def schedule_appointment():
     #     return jsonify({"message": "Error scheduling appointment", "error": str(e)}), 500
 
 
+
+@app.route('/finishAppointment', methods=['POST'])
+def finish_appointment():
+    appointment_id = request.json["appointmentId"]
+    
+    # try:
+        # Fetch the appointment details
+    appointment_id,patient_id,doctor_id,patient_name,doctor_name,appointment_date,appointment_time = db.fetchone("SELECT * FROM appointments WHERE appointment_id=%s", appointment_id)
+    if not appointment_id:
+        return jsonify({"message": "Appointment not found"}), 404
+    
+    print(patient_id, doctor_id, patient_name, doctor_name, appointment_date, appointment_time)
+        
+    # Insert the finished appointment into ScheduledAppointments
+    insert_query = "INSERT INTO scheduledappointments (patient_id, doctor_id, patient_name, doctor_name, date, time) VALUES (%s, %s, %s, %s, %s, %s)"
+    print(type(appointment_date), type(appointment_time))
+    db.execute(insert_query, 
+        patient_id, doctor_id, patient_name, doctor_name, appointment_date, appointment_time
+    )
+    
+    # Optionally, you can delete the appointment from the appointments table
+    db.execute("DELETE FROM appointments WHERE appointment_id=%s", appointment_id,)
+    
+    return jsonify({"message": "Appointment finished successfully."}), 200
+    # except Exception as e:
+    #     return jsonify({"message": "Error finishing appointment", "error": str(e)}), 500
+    
+
+
+
+
 @app.route('/getScheduledAppointments', methods=['GET'])
 def get_scheduled_appointments():
     try:
         appointments = db.fetchall("SELECT * FROM appointments")
-        return jsonify(appointments), 200
+        
+        # Convert the appointments to a serializable format
+        serialized_appointments = []
+        for appointment in appointments:
+            serialized_appointment = {
+                "id": appointment[0],
+                "patient_id": appointment[1],
+                "doctor_id": appointment[2],
+                "patient_name": appointment[3],
+                "doctor_name": appointment[4],
+                "date": appointment[5].isoformat(),  # Convert date to string
+                "time": str(appointment[6])  # Convert timedelta to string
+            }
+            serialized_appointments.append(serialized_appointment)
+        
+        return jsonify(serialized_appointments), 200
     except Exception as e:
         return jsonify({"message": "Error fetching appointments", "error": str(e)}), 500
 

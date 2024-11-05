@@ -25,7 +25,7 @@ function App() {
         <Route path='/doctorLogin' element={<DoctorLogin />} />
         <Route path='/docview' element={<DoctorView />} />
         <Route path='/sub' element={<AddSubscribersPage />} />
-        <Route path='/sd' element={<DoctorSchedule/>} />
+        <Route path='/sd' element={<DoctorSchedule />} />
         <Route path='/view' element={<View />} />
         <Route path='/ap' element={<Appointments />} />
         <Route path='/search' element={<SearchSubscribersPage />} />
