@@ -1,0 +1,28 @@
+.background-image {
+    background-image: url('https://st2.depositphotos.com/36924814/46071/i/450/depositphotos_460713580-stock-photo-medical-health-blue-cross-neon.jpg');
+
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* Full viewport height */
+  }
+  
+  .form-container {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+  }
+  
+
+  .login-heading {
+    color: green; /* Set the text color to green */
+    font-weight: bold; /* Make the text bold */
+    font-size: 2rem; /* Adjust the size as needed */
+    margin-bottom: 10px; /* Space between heading and caption */
+  }
+  
+  .caption-text {
+    color: black; /* Set the caption color to black */
+    font-size: 0.875rem; /* Smaller size than the heading */
+    margin-bottom: 20px; /* Space below caption */
+  }
+  

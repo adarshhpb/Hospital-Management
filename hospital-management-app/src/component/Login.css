@@ -1,0 +1,81 @@
+/* Example styles to ensure a clean look */
+.container {
+  padding: 0 15px;
+  /* Add horizontal padding for better spacing */
+}
+
+.login-heading {
+  color: green;
+  /* New style for login heading */
+}
+
+.text-center {
+  margin-bottom: 20px;
+  /* Space out from the fields below */
+}
+
+.form-label {
+  font-weight: bold;
+  /* Make labels stand out */
+}
+
+/* Ensure form inputs have consistent styling */
+.form-control {
+  height: 40px;
+  /* Set a uniform height for all inputs */
+  font-size: 16px;
+  /* Adjust font size for better readability */
+  border-radius: 20px;
+  /* Make the input fields oval */
+  border: 1px solid #ccc;
+  /* Border style for input fields */
+  padding-left: 15px;
+  /* Add padding to the left for better text alignment */
+  transition: border-color 0.3s;
+  /* Smooth transition for border color */
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  /* Change border color on focus */
+  outline: none;
+  /* Remove default outline */
+}
+
+.btn {
+  width: 100%;
+  /* Make buttons full width of the input container */
+  padding: 10px;
+  /* Consistent padding for buttons */
+  border-radius: 20px;
+  /* Make button oval */
+}
+
+.background-image {
+  background-image: url('C:\Users\ASUS\Downloads\bg.png');
+  /*made change here*/
+  /* Add your background image path */
+  /* Add your background image path */
+  background-size: cover;
+  /* Ensure the image covers the entire area */
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Prevent the image from repeating */
+  height: 100vh;
+  /* Ensure it takes the full height of the viewport */
+}
+
+/*asdalkdja*/
+
+
+
+
+
+
+
+/* Optionally add some spacing below the form */
+.row.g-3 {
+  margin-top: 15px;
+  /* Space between form elements */
+}

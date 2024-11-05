@@ -1,0 +1,23 @@
+.form-container {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa; /* Light background for the form */
+}
+
+.form-heading {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.caption-text {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #6c757d; /* Gray color */
+}
+
+.background-image {
+    background-image: url('https://st2.depositphotos.com/36924814/46071/i/450/depositphotos_460713580-stock-photo-medical-health-blue-cross-neon.jpg'); /* Add your background image here */
+    background-size: cover;
+    background-position: center;
+}
