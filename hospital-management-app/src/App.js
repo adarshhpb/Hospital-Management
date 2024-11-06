@@ -11,6 +11,8 @@ import DoctorLogin from './component/DoctorLogin';
 import AddDoctorPage from './component/AddDoctorPage';
 import DoctorView from './component/DoctorView';
 import DoctorSchedule from './component/DoctorSchedule';
+import BloodBank from './component/BloodBank';
+import BloodBankDetails from './component/BloodBankDetails';
 
 
 
@@ -31,6 +33,8 @@ function App() {
         <Route path='/search' element={<SearchSubscribersPage />} />
         <Route path='/doc' element={<AddDoctorPage />} />
         <Route path='/' element={<Mainlog />} />
+        <Route path='/ba' element={<BloodBank />} />
+        <Route path='/dl' element={<BloodBankDetails />} />
       </Routes>
     </BrowserRouter>
   );

@@ -16,7 +16,7 @@ const DocHeader = () => {
 
                             <Link class="nav-link active" aria-current="page" to="/docview">Department</Link>
                             <Link class="nav-link" to="/sd">Scheduled Appointments</Link>
-                            <Link class="nav-link" to="/search"></Link>
+                            <Link class="nav-link" to="/dl">Donor List</Link>
                             <Link class="nav-link" to="/">Login Out</Link>
 
 

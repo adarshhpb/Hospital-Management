@@ -48,7 +48,7 @@ const AddDoctorPage = () => {
             if (response.status === 200) {
                 // If registration is successful, navigate to the login page
                 alert('Registration successful');
-                navigate('/login');
+                navigate('/doctorLogin');
             } else {
                 // Handle registration failure (e.g., show an error message)
                 console.error('Registration failed');

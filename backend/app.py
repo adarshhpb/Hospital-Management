@@ -141,6 +141,31 @@ def finish_appointment():
     
 
 
+@app.route('/getBloodBankDetails', methods=['GET'])
+def get_blood_bank_details():
+    try:
+        blood_bank_details = db.fetchall('SELECT * FROM bloodbank')
+        
+        # Convert the blood bank details to a serializable format
+        serialized_details = []
+        for detail in blood_bank_details:
+            serialized_detail = {
+                'user_id': detail[0],
+                'name': detail[1],
+                'blood_type': detail[2],
+                'age': detail[3],
+                'date': detail[4].isoformat(),  # Convert date to string
+            }
+            serialized_details.append(serialized_detail)
+        
+        return jsonify(serialized_details), 200
+    except Exception as e:
+        return jsonify({"message": "Error fetching blood bank details", "error": str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
 
 
 @app.route('/getScheduledAppointments', methods=['GET'])
